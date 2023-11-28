@@ -1,7 +1,11 @@
 import Test.Bptest;
 import Test.*;
 
-import java.util.ArrayList;
+import javax.swing.*;
+
+
+import java.net.URL;
+
 
 public class Patient {
     private final String name;
@@ -36,72 +40,81 @@ public class Patient {
         return age;
     }
 
-    public boolean isMri() {
-        return mri;
-    }
-
-    public boolean isBp() {
-        return bp;
-    }
-
-    public void setUrl(String urlname) {
-        this.urlname = urlname;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public void setMri(boolean mri) {
-        this.mri = mri;
-    }
-
-    public void setBp(boolean bp) {
-        this.bp = bp;
-    }
-
-    public String getInforDisplay(Bptest bptest){
 
 
-
-
-        String display=new String("<html>");
-        display+="Name:"+name+"<br>";
-
-        display+="Age:"+age+"<br>";
-
-
-
-        String display2=new String("<html>");
-        display2+="Blood pressure"+ bptest.getInfo().get(0)+" over "+bptest.getInfo().get(1);
-
-        return display+"<br>"+display2+"<br></html>";
-
-
-
-
-    }
 
     public String getInforAdmin(Bptest bptest, Mriscan mriscan){
         String result = "";
-        result += "Patient: "+name;
-        result+="MRI: "+mriscan.getTesla()+" Tesla,";
-        result+=mriscan.getCurrentDate().toString()+":";
-        result+="BP "+ bptest.getMeasurement()+bptest.getCurrentDate().toString();
+        result += "Patient: "+name+":";
+        result+=" MRI: "+mriscan.getTesla()+" Tesla, ";
+        result+=mriscan.getInfo().get(2)+": ";
+        result+="BP "+ bptest.getMeasurement()+bptest.getInfo().get(3);
         return result;
-
-
-
-
-
-
-
-
-
-
 
     }
 
 
 
+
+    public static void showPatientInformation(Patient patient, Bptest bptest, Mriscan mriscan) {
+
+        JFrame frame = new JFrame("Patient Information");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+        JPanel mainPanel = new JPanel();
+
+
+
+        JLabel nameLabel1 = new JLabel("Name: " + patient.getName());
+        JLabel ageLabel1 = new JLabel("Age: " + patient.getAge());
+
+
+        JLabel nameLabel = new JLabel();
+        try {
+            URL imageUrl = new URL(patient.getUrlname());
+            ImageIcon imageIcon = new ImageIcon(imageUrl);
+            nameLabel.setIcon(imageIcon);
+        } catch (Exception e) {
+            e.printStackTrace();
+            nameLabel.setText("Image not found");
+        }
+
+        JLabel label = new JLabel();
+        try {
+            URL imageUrl2 = new URL(mriscan.getUrlmri());
+            ImageIcon imageIcon = new ImageIcon(imageUrl2);
+            label.setIcon(imageIcon);
+        } catch (Exception e) {
+            e.printStackTrace();
+            label.setText("Image not found");
+        }
+
+
+        JLabel bloodPressureLabel = new JLabel("<html>Blood pressure<br>" + bptest.getInfo().get(0) + " over " + bptest.getInfo().get(1) + "</html>");
+
+        mainPanel.add(nameLabel);
+
+        mainPanel.add(nameLabel1);
+        mainPanel.add(ageLabel1);
+        mainPanel.add(label);
+
+
+        mainPanel.add(bloodPressureLabel);
+
+
+        frame.add(mainPanel);
+
+        frame.pack();
+
+
+
+
+        frame.setVisible(true);
+    }
 }
+
+
+
+
+

@@ -1,6 +1,6 @@
 package Test;
 
-import java.time.LocalDate;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +11,8 @@ public class Bptest extends Measurement {
     private String diapre;
 
     private String measurement;
-    public Bptest(String syspre,String diapre,String measurement){
-        super();
+    public Bptest(String syspre,String diapre,String measurement,int y, int m, int d){
+        super(y,m,d);
         this.syspre=syspre;
         this.diapre=diapre;
 
@@ -21,33 +21,16 @@ public class Bptest extends Measurement {
 
     }
 
-    public void setDiapre(String diapre) {
-        this.diapre = diapre;
-    }
 
-    public void setMeasurement(String measurement) {
-        this.measurement = measurement;
-    }
 
-    public void setSyspre(String syspre) {
-        this.syspre = syspre;
-    }
 
-    public String getDiapre() {
-        return diapre;
-    }
-
-    public String getSyspre() {
-        return syspre;
-    }
 
     public String getMeasurement() {
         return measurement;
     }
 
-    public LocalDate getCurrentDate() {
-        return currentDate;
-    }
+
+
 
     public List<String> getInfo(){
         ArrayList<String > data = new ArrayList<String>();
@@ -55,7 +38,7 @@ public class Bptest extends Measurement {
         data.add(syspre);
         data.add(diapre);
         data.add(measurement);
-        data.add(currentDate.toString());
+        data.add(ld.toString());
 
 
         return data;

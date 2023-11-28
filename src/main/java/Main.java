@@ -10,60 +10,22 @@ import java.net.URL;
 public class Main {
     public static void main(String[] args) {
         Patient pat1 = new Patient("Daphne Von Oram",62,true,true,"https://martinh.netfirms.com/BIOE60010/DaphneVonOram.jpg");
-        Mriscan mriscan1 = new Mriscan("https://martinh.netfirms.com/BIOE60010/mri1.jpg","2");
-//        Bptest bptest1 = new Bptest("130","70","ST");
+        Mriscan mriscan1 = new Mriscan("https://martinh.netfirms.com/BIOE60010/mri1.jpg","2",2023,9,14);
+        Bptest bptest1 = new Bptest("130","70","ST",2023,9,15);
 
 
 
 
         Patient pat2 = new Patient("Sebastian Compton", 31,true,true,"https://martinh.netfirms.com/BIOE60010/SebastianCompton.jpg");
-        Mriscan mriscan2 = new Mriscan("https://martinh.netfirms.com/BIOE60010/mri2.jpg","4");
-        Bptest bptest2 = new Bptest("150","80","VST");
-
-
-
-
-        JFrame frame = new JFrame("Stroke investigation system");
-        frame.setSize(500,500);
-
-        JPanel displayPanel = new JPanel();
-        // Create a label for each patient's text
-        JLabel displayLabel1 = new JLabel(pat1.getInforDisplay(new Bptest("130","70","ST")));
-//        JLabel displayLabel2 = new JLabel("v");
-
-        displayPanel.add(displayLabel1);
-//        JLabel label = new JLabel();
-        URL imageURL=null;
-
-        try {
-            imageURL = new URL("https://martinh.netfirms.com/b3ta/kennyg.jpg");
-
-        }
-        catch (MalformedURLException e){
-            System.out.println(e.getMessage());
-        }
-        ImageIcon thisImageIcon = new ImageIcon(imageURL);
-
-
-        displayLabel1.setIcon(thisImageIcon);
-
-
-
-
-
-
-
-//        displayPanel.add(displayLabel2);
-        frame.setContentPane(displayPanel);
-        frame.setVisible(true);
-        frame.addWindowListener(new WindowAdapter() {// Ends program if close window is clicked
-            public void windowClosing(WindowEvent e) {
-                frame.dispose();
-            }
-        });
+        Mriscan mriscan2 = new Mriscan("https://martinh.netfirms.com/BIOE60010/mri2.jpg","4",2023,11,19);
+        Bptest bptest2 = new Bptest("150","80","VST",2023,11,20);
 
 
         System.out.println(pat2.getInforAdmin(bptest2,mriscan2));
+        System.out.println(pat1.getInforAdmin(bptest1,mriscan1));
+        pat2.showPatientInformation(pat2, bptest2, mriscan2);
+        pat1.showPatientInformation(pat1, bptest1, mriscan1);
+
 
 
 

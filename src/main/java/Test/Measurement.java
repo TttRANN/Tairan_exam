@@ -3,10 +3,10 @@ package Test;
 import java.time.LocalDate;
 
 public class Measurement {
-    protected LocalDate currentDate;
+    protected LocalDate ld;
 
-    public Measurement() {
-        this.currentDate = LocalDate.now();
+    public Measurement(int y, int m, int d) {
+        this.ld = LocalDate.parse(LocalDate.of(y,m,d).toString());
     }
 
 }
